@@ -9,10 +9,7 @@
 # Offense count: 1
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
-    - 'application.rb'
+  Enabled: false
 
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).

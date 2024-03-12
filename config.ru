@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
-require './application'
+require 'dotenv'
+Dotenv.load('.env')
 
-use Rack::Reloader, 0
+require 'pry-byebug'
+require_relative 'config/loader'
+
+Loader.load(env: ENV['RACK_ENV']&.to_sym || :development)
+
 run Application.new
