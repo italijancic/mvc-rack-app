@@ -38,7 +38,6 @@ class Loader
         end
       end
 
-      p paths
       paths
     end
   end
