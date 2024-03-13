@@ -23,7 +23,7 @@ class Router
       action = route_info[:action]
 
       if controller.respond_to?(action)
-        p "\nRouting to #{klass}##{action}"
+        puts "\n[Router::route!]: Routing to => #{klass}##{action}"
         return controller.public_send(action)
       else
         # Action not implemented

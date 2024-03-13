@@ -3,7 +3,7 @@
 require 'zeitwerk'
 
 class Loader
-  attr_accessor :loader, :env
+  attr_reader :loader, :env
 
   TEST_DIRECTORIES = %w[spec/].freeze
 

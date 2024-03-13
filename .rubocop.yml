@@ -30,3 +30,6 @@ Style/StringLiterals:
 
 Metrics/MethodLength:
   Enabled: false
+
+Style/GlobalStdStream:
+  Enabled: false
