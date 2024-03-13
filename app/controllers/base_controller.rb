@@ -19,6 +19,10 @@ class BaseController
     HTML
   end
 
+  def not_found(msg = '<h1>HTPP 404 Page not found :( !</h1>')
+    [404, { 'Content-Type' => 'text/plain' }, [msg]]
+  end
+
   private
 
   def build_response(body, status: 200)

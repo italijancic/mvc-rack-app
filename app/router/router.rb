@@ -11,36 +11,17 @@ class Router
     @request = request
   end
 
-  def route!
-    # Get controller class name
-    klass = controller_class
-    unless klass.nil?
-      add_route_info_to_request_params!
-
-      # Instantiate a new object of controller class
-      controller = klass.new(@request)
-      # Get accion name to call
-      action = route_info[:action]
-
-      if controller.respond_to?(action)
-        puts "\n[Router::route!]: Routing to => #{klass}##{action}"
-        return controller.public_send(action)
-      else
-        # Action not implemented
-        not_found
-      end
-    end
-    # Controller not implemented
-    not_found
+  def route
+    add_route_info_to_request_params
+    puts "\n[Router::route!]: Routing to => #{controller_class}##{route_info[:action]}"
+    controller_class.new(@request).send(route_info[:action])
+  rescue NameError
+    BaseController.new(@request).not_found
   end
 
   private
 
-  def not_found(msg = 'Not Found')
-    [404, { 'Content-Type' => 'text/plain' }, [msg]]
-  end
-
-  def add_route_info_to_request_params!
+  def add_route_info_to_request_params
     @request.params.merge!(route_info)
   end
 
@@ -69,7 +50,7 @@ class Router
   end
 
   def http_method
-    @request.env['REQUEST_METHOD']
+    @request.request_method
   end
 
   # Get the proper controller

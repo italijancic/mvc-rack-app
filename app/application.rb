@@ -2,11 +2,12 @@
 
 class Application
   def call(env)
-    request = Rack::Request.new(env)
-    serve_request(request)
+    handle_request(env)
   end
-end
 
-def serve_request(request)
-  Router.new(request).route!
+  private
+
+  def handle_request(env)
+    Router.new(Rack::Request.new(env)).route
+  end
 end
