@@ -2,6 +2,7 @@ source "https://rubygems.org/"
 
 gem "puma", "~> 6.4"
 gem "rack", "~> 2.2"
+gem "rack-console", "~> 1.3"
 gem "dotenv", "~> 3.1"
 gem "zeitwerk", "~> 2.6"
 
@@ -11,9 +12,7 @@ group :development do
 end
 
 group :development, :test do
-  gem "pry-byebug", "~> 3.10"
+  gem "debug", "~> 1.9"
   gem "rack-test", "~> 2.1"
   gem "rspec", "~> 3.13"
 end
-
-
