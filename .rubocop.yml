@@ -26,3 +26,7 @@ Style/FrozenStringLiteralComment:
 Style/StringLiterals:
   Exclude:
     - 'Gemfile'
+
+
+Metrics/MethodLength:
+  Enabled: false
