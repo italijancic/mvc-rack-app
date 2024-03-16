@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
+require 'erb'
+
 class BaseController
-  attr_reader :request, :resource, :action
+  attr_reader :request
 
   def initialize(request)
     @request = request
-    @resource = request.params[:resource].to_s
-    @action = request.params[:action].to_s
   end
 
   def index
@@ -20,23 +20,21 @@ class BaseController
   private
 
   def render_template
-    template_file = File.join(resource, "#{action}.html.erb")
-    file_path = template_file_path_for(template_file)
-
-    if File.exist?(file_path)
-      puts "Rendering template file #{template_file}"
-      render_erb_file(file_path)
+    if File.exist?(template_file_path)
+      puts "Rendering template file #{template_file_path}"
+      render_erb_file(template_file_path)
     else
       "ERROR: no available template file #{template_file}"
     end
   end
 
-  def template_file_path_for(file_name)
-    File.expand_path(File.join('../../views', file_name), __FILE__)
+  def template_file_path
+    File.expand_path(File.join('../../views', "#{resource}/#{action}.html.erb"), __FILE__)
   end
 
   def render_erb_file(file_path)
-    File.read(file_path)
+    raw = File.read(file_path)
+    ERB.new(raw).result(binding)
   end
 
   def build_response(body, status: 200)
@@ -49,5 +47,13 @@ class BaseController
 
   def params
     request.params
+  end
+
+  def resource
+    request.params[:resource].to_s
+  end
+
+  def action
+    request.params[:action].to_s
   end
 end
