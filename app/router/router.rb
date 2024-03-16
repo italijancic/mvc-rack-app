@@ -7,22 +7,24 @@
 # POST   /resource           # create - create a new resource
 
 class Router
+  attr_reader :request
+
   def initialize(request)
     @request = request
   end
 
   def route
     add_route_info_to_request_params
-    puts "\n[Router::route!]: Routing to => #{controller_class}##{route_info[:action]}"
-    controller_class.new(@request).send(route_info[:action])
+    puts "\n[Router::route]: Routing to => #{controller_class}##{route_info[:action]}"
+    controller_class.new(request).send(route_info[:action])
   rescue NameError
-    BaseController.new(@request).not_found
+    BaseController.new(request).not_found
   end
 
   private
 
   def add_route_info_to_request_params
-    @request.params.merge!(route_info)
+    request.params.merge!(route_info)
   end
 
   def route_info
@@ -38,7 +40,7 @@ class Router
     when 'new'
       [http_method, nil, :new]
     when nil
-      action = @request.get? ? :index : :create
+      action = request.get? ? :index : :create
       [http_method, nil, action]
     else
       [http_method, fragment, :show]
@@ -46,11 +48,11 @@ class Router
   end
 
   def path_fragments
-    @path_fragments ||= @request.path.split('/').reject(&:empty?)
+    @path_fragments ||= request.path.split('/').reject(&:empty?)
   end
 
   def http_method
-    @request.request_method
+    request.request_method
   end
 
   # Get the proper controller
