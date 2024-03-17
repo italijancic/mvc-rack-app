@@ -19,6 +19,20 @@ class BaseController
 
   private
 
+  def render_partial(file_name)
+    partial_path = partial_file_path(file_name)
+    if File.exist?(partial_path)
+      puts "Rendering template file #{partial_path}"
+      render_erb_file(partial_path)
+    else
+      "ERROR: no available template file #{partial_path}"
+    end
+  end
+
+  def partial_file_path(file_name)
+    File.expand_path(File.join('../../views', "#{resource}/#{file_name}.html.erb"), __FILE__)
+  end
+
   def render_template
     if File.exist?(template_file_path)
       puts "Rendering template file #{template_file_path}"
