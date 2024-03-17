@@ -1,0 +1,16 @@
+---
+Dog_1: !ruby/object:Dog
+  id: 1
+  name: Fochino
+Dog_2: !ruby/object:Dog
+  id: 2
+  name: Emaquia
+Dog_3: !ruby/object:Dog
+  id: 3
+  name: Felipe
+Dog_4: !ruby/object:Dog
+  id: 4
+  name: Loluncha
+Dog_5: !ruby/object:Dog
+  id: 5
+  name: Locho

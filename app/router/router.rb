@@ -1,13 +1,22 @@
 # frozen_string_literal: true
 
+# ----------------
 # Routes to handle
-# GET    /resource           # index  - get a list of the resources
-# GET    /resource/:id       # show   - get a specific resource
-# GET    /resource/new       # new    - get an HTML page with a form
-# POST   /resource           # create - create a new resource
+# ----------------
+# GET     /resource           # index   - get a list of the resources
+# GET     /resource/:id       # show    - get a specific resource
+# DELETE  /resource/:id       # delete  - delete specific resource
+# GET     /resource/new       # new     - get an HTML page with a form
+# POST    /resource           # create  - create a new resource
+#
+# -------
+# Pending
+# -------
+# PUT   -> Complete update of one resource
+# PATCH -> Partial update of one resource
 
 class Router
-  attr_reader :request
+  attr_reader :request, :logger
 
   def initialize(request)
     @request = request
@@ -15,7 +24,7 @@ class Router
 
   def route
     add_route_info_to_request_params
-    puts "\n[Router::route]: Routing to => #{controller_class}##{route_info[:action]}"
+    puts "[Router.route]: Routing to => #{controller_class}##{route_info[:action]}"
     controller_class.new(request).send(route_info[:action])
   rescue NameError
     BaseController.new(request).not_found
@@ -43,7 +52,8 @@ class Router
       action = request.get? ? :index : :create
       [http_method, nil, action]
     else
-      [http_method, fragment, :show]
+      action = request.get? ? :show : :delete
+      [http_method, fragment, action]
     end
   end
 

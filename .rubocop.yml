@@ -33,3 +33,9 @@ Metrics/MethodLength:
 
 Style/GlobalStdStream:
   Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
