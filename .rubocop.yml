@@ -9,10 +9,7 @@
 # Offense count: 1
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
-    - 'application.rb'
+  Enabled: false
 
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -29,3 +26,10 @@ Style/FrozenStringLiteralComment:
 Style/StringLiterals:
   Exclude:
     - 'Gemfile'
+
+
+Metrics/MethodLength:
+  Enabled: false
+
+Style/GlobalStdStream:
+  Enabled: false
