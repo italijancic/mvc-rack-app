@@ -22,7 +22,7 @@ class BaseController
   def render_partial(file_name)
     partial_path = partial_file_path(file_name)
     if File.exist?(partial_path)
-      puts "Rendering template file #{partial_path}"
+      puts "[BaseController.render_partial]: Rendering => #{partial_path}"
       render_erb_file(partial_path)
     else
       "ERROR: no available template file #{partial_path}"
@@ -35,10 +35,10 @@ class BaseController
 
   def render_template
     if File.exist?(template_file_path)
-      puts "Rendering template file #{template_file_path}"
+      puts "[BaseController.render_template]: Rendering => #{template_file_path}"
       render_erb_file(template_file_path)
     else
-      "ERROR: no available template file #{template_file}"
+      puts "[BaseController.render_template]: Error #{template_file_path} doesn't exist!!!"
     end
   end
 
@@ -61,6 +61,10 @@ class BaseController
 
   def params
     request.params
+  end
+
+  def body
+    request.body
   end
 
   def resource

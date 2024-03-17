@@ -1,24 +1,19 @@
 # frozen_string_literal: true
 
-require 'ostruct'
-
 class DogsController < BaseController
   # GET /dogs
   #
   def index
     @title = 'So many dogs'
-    @dogs = (1..5).map do |i|
-      OpenStruct.new(id: i, name: "Dog-#{i}")
-    end
+    @dogs = Dog.all
     build_response(render_template)
   end
 
-  # GET GET /dogs/:id?name=Optional%20Custom%20Name
+  # GET /dogs/:id
   #
   def show
-    dog_name = params['name'] || "Dog-#{params[:id]}"
-    @title = "#{dog_name}'s page"
-    @dog = OpenStruct.new(id: params[:id], name: dog_name)
+    @dog = Dog.find(id)
+    @title = "#{@dog.name}'s page"
     build_response(render_template)
   end
 
@@ -33,6 +28,26 @@ class DogsController < BaseController
   # not implemented for now
   #
   def create
+    dog = Dog.new(name: params['dog']['name'])
+    dog.save
+    redirect_to "/dogs/#{dog.id}"
+  end
+
+  # DELETE /dogs/:id
+  def delete
+    dog = Dog.find(id)
+    if dog.nil?
+      puts "[ERROR][Dog#delete]: couldn't find Dog_id: #{@dog.id}"
+    else
+      dog.delete
+      puts "[INFO][Dog#delete]: Delete Dog_id: #{@dog.id}, not implemented yet!"
+    end
     redirect_to '/dogs'
+  end
+
+  private
+
+  def id
+    params[:id].to_i
   end
 end

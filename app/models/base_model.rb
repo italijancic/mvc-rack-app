@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 require 'pstore'
+require 'yaml/store'
 
 class BaseModel
-  DB_FILE = File.expand_path('../db/db.pstore', __dir__)
-
   module ClassMethods
     # Find a record bi ID
     #
@@ -32,6 +31,14 @@ class BaseModel
       end
     end
 
+    # Delete an instance in DB
+    def delete(object)
+      db_id = derive_db_id(object.class.name, object.id)
+      db.transaction do
+        db.delete(db_id)
+      end
+    end
+
     # Scoped by class, to auto-increment the IDs
     #
     def next_available_id
@@ -44,10 +51,18 @@ class BaseModel
 
     private
 
-    # Access to the PStore binary file
+    # Access to the DB selected type
     #
     def db
-      @db ||= PStore.new(DB_FILE)
+      @db ||= case ENV['DB_TYPE']
+              when 'pstore'
+                PStore.new(File.expand_path('../db/db.pstore', __dir__))
+              when 'ymlstore'
+                YAML::Store.new(File.expand_path('../db/db.yml', __dir__))
+              else
+                # By default use pstore
+                PStore.new(File.expand_path('../db/db.pstore', __dir__))
+              end
     end
 
     # Scoped by class, so that different model classes
@@ -83,5 +98,9 @@ class BaseModel
 
   def ensure_presence_of_id
     self.id ||= self.class.next_available_id
+  end
+
+  def delete
+    self.class.delete(self)
   end
 end
