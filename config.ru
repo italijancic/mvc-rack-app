@@ -2,8 +2,7 @@
 
 require 'rack'
 require 'rack/contrib'
-# require 'debug'
-# binding.irb -> cmd to add a break point in the code
+require 'debug'
 require_relative 'config/loader'
 
 Loader.load(env: ENV['RACK_ENV']&.to_sym || :development)
@@ -20,6 +19,7 @@ app = Rack::Builder.new do
       [:all, { 'cache-control' => 'public, max-age=86400' }]
     ]
   }
+  use BasicAuthMiddleware, ENV['BASIC_USER_NM'], ENV['BASIC_PASSWORD']
   run Application.new
 end
 
