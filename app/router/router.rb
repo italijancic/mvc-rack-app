@@ -67,7 +67,13 @@ class Router
 
   # Get the proper controller
   def controller_name
-    "#{route_info[:resource].capitalize}Controller"
+    resource = route_info[:resource]
+    if resource.include?('json')
+      resource = resource.slice(4, resource.length).capitalize
+      "Json#{resource}Controller"
+    else
+      "#{resource.capitalize}Controller"
+    end
   end
 
   def controller_class
