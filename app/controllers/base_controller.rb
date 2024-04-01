@@ -14,7 +14,7 @@ class BaseController
   end
 
   def not_found(msg = '<h1>HTPP 404 Page not found :( !</h1>')
-    [404, { 'Content-Type' => 'text/plain' }, [msg]]
+    [404, { 'content-type' => 'text/plain' }, [msg]]
   end
 
   private
@@ -52,7 +52,7 @@ class BaseController
   end
 
   def build_response(body, status: 200)
-    [status, { 'Content-Type' => 'text/html' }, [body]]
+    [status, { 'content-type' => 'text/html' }, [body]]
   end
 
   def redirect_to(uri)

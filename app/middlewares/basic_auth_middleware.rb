@@ -25,7 +25,7 @@ class BasicAuthMiddleware
 
   def unauthorized_response
     headers = {
-      'Content-Type' => 'text/plain',
+      'content-type' => 'text/plain',
       'WWW-Authenticate' => 'Basic realm="Restricted Area"'
     }
     body = ['Unauthorized']
