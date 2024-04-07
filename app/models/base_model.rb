@@ -56,12 +56,12 @@ class BaseModel
     def db
       @db ||= case ENV['DB_TYPE']
               when 'pstore'
-                PStore.new(File.expand_path('../db/db.pstore', __dir__))
+                PStore.new(File.expand_path("#{ENV['DB_PATH']}.pstore", __dir__))
               when 'ymlstore'
-                YAML::Store.new(File.expand_path('../db/db.yml', __dir__))
+                YAML::Store.new(File.expand_path("#{ENV['DB_PATH']}.yml", __dir__))
               else
                 # By default use pstore
-                PStore.new(File.expand_path('../db/db.pstore', __dir__))
+                PStore.new(File.expand_path("#{ENV['DB_PATH']}.pstore", __dir__))
               end
     end
 

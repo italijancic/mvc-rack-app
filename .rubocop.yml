@@ -27,7 +27,6 @@ Style/StringLiterals:
   Exclude:
     - 'Gemfile'
 
-
 Metrics/MethodLength:
   Enabled: false
 
@@ -38,4 +37,7 @@ Style/RedundantSelf:
   Enabled: false
 
 Lint/MissingSuper:
+  Enabled: false
+
+Metrics/BlockLength:
   Enabled: false

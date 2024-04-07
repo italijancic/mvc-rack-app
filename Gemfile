@@ -2,6 +2,7 @@ source "https://rubygems.org/"
 
 ruby "3.3.0"
 
+gem 'base64', '~> 0.2.0'
 gem "dotenv", "~> 3.1"
 gem "puma", "~> 6.4"
 gem "rack", "~> 2.2"

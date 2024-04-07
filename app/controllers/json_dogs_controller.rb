@@ -8,7 +8,7 @@ class JsonDogsController < JsonBaseController
     if @dogs.empty?
       not_found
     else
-      json_response({ dogs: ObjectSerializer.serialize_each(@dogs) })
+      json_response(ObjectSerializer.serialize_each(@dogs))
     end
   end
 
@@ -19,7 +19,7 @@ class JsonDogsController < JsonBaseController
     if @dog.nil?
       not_found
     else
-      json_response({ dog: ObjectSerializer.serialize(@dog) })
+      json_response(ObjectSerializer.serialize(@dog))
     end
   end
 
