@@ -3,13 +3,13 @@
 require 'rack/test'
 require 'debug'
 require 'json'
+require 'dotenv'
 require_relative '../config/loader'
 require_relative 'support/test_db_helper'
 require_relative 'support/authentication_helper'
 
-Loader.load(env: :test)
-
 RSpec.configure do |config|
+  ENV['RACK_ENV'] = 'test'
   config.include Rack::Test::Methods
   config.include TestDbHelper
   config.before(:each) do

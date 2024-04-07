@@ -2,10 +2,14 @@
 
 require 'spec_helper'
 
+APP = Rack::Builder.parse_file('config.ru').first
+
 describe Application do
   include AuthenticationHelper
 
-  subject(:app) { Application.new }
+  def app
+    APP
+  end
 
   context "when doing a GET '/jsondogs'" do
     let(:response) { authenticated_request :get, '/jsondogs' }
