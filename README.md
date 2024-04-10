@@ -53,7 +53,7 @@ The use case to illustrate this functionality is an app to work with `dogs`:
   - **main:** `http://127.0.0.1:3000/dogs`
   - **specific resource:** `http://127.0.0.1:3000/dogs/:id`, where the `id` in the index on DB.
 
-## JSON responses
+### JSON responses
   - **main:** `http://127.0.0.1:3000/jsondogs`
   - **specific resource:** `http://127.0.0.1:3000/jsondogs/:id`, where the `id` in the index on DB.
 
