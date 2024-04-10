@@ -21,7 +21,7 @@ The use case to illustrate this functionality is an app to work with `dogs`:
 - Get one dog by `id`
 - Delete a dog by `id`
 
-## Elementary conceptions
+## ⚡️ Elementary conceptions
 - A global loader is implemented to handle project files.
 - To handle `routes` is designed a router that tries to emulate `rails` actions:
 
@@ -47,50 +47,49 @@ The use case to illustrate this functionality is an app to work with `dogs`:
   - `yml`
 - To authenticate we use `BasiAuth` see credentials on `.env` files
 
-## Implemented routes
+## 🛣️ Implemented routes
 
-### Rendered
+### 👀 Rendered
   - **main:** `http://127.0.0.1:3000/dogs`
   - **specific resource:** `http://127.0.0.1:3000/dogs/:id`, where the `id` in the index on DB.
 
-### JSON responses
+### ｛｝JSON responses
   - **main:** `http://127.0.0.1:3000/jsondogs`
   - **specific resource:** `http://127.0.0.1:3000/jsondogs/:id`, where the `id` in the index on DB.
 
 See in the next section the differents `HTTP methods` and actions that have been implemented.
 
-### Example request
+### 📚 Example request
 
-#### Get all dogs
+#### [🐶...🐶] Get all dogs
 
 ```bash
 curl -u italijancic:test1234 http://127.0.0.1:3000/jsondogs
 ```
 
-#### Get one dog by id
+#### {🐶} Get one dog by id
 
 ```bash
 curl -u italijancic:test1234 http://127.0.0.1:3000/jsondogs/:id
 ```
 
-#### Create a new dog
+#### 🆕 Create a new dog
 
 ```bash
 curl -X POST -u italijancic:test1234 http://127.0.0.1:3000/jsondogs -H "Content-Type: application/json" -d '{"name":"dog_name"}'
 ```
 
-#### Delete a dog
+#### ⌫ Delete a dog
 
 ```bash
 curl -X DELETE -u italijancic:test1234 http://127.0.0.1:9292/jsondogs/:id
 ```
 
-
 *NOTE:* `port` will be `3000` if we run app with `docker compose` or `9292` if we run app from `Dockerfile.base` or locally
 
-## How to run the app
+## 🚀 How to run the app
 
-### Dockercompose: Recommended
+### 🐳 Dockercompose: Recommended
 
 Build app
 
@@ -104,7 +103,7 @@ Run app
 docker compose run
 ```
 
-### Dockerfile.basic
+### 🐳 Dockerfile.basic
 
 Build app
 
@@ -118,12 +117,14 @@ Run app
 docker run -p 9292:9292 -e RACK_ENV=development basic-rack-app
 ```
 
-### Locally
+### 💻 Locally
 Go to app folder and run:
 
 ```bash
 rackup
 ```
+
+#### ⌨️ APP CLI
 
 To interact with app using a CLI you can run
 
@@ -144,7 +145,7 @@ irb(main):001> Dog.all
 irb(main):002>
 ```
 
-## Resources
+## 📚 Resources
 
 - [MVC rack app from scratch](https://tommaso.pavese.me/2016/06/05/a-rack-application-from-scratch-part-1-introducting-rack/#a-naive-and-incomplete-framework)
 
