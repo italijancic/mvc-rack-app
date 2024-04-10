@@ -1,4 +1,6 @@
 # 💎 MVC Rack application from scratch
+Author: Ivan Talijancic | italijancic@outlook.com
+
 This repo contains an `MVC app` built from scratch using `Rack`.
 The main idea is to _"illustrate"_ the use of rack for web applications and the features covered in this case are:
 
@@ -10,17 +12,18 @@ The main idea is to _"illustrate"_ the use of rack for web applications and the 
 - Implement rspec
 - Dockerize app:
   - Simple docker version
-  - _"More production ready version"_: using [phusion passenger](https://github.com/phusion/passenger)
+  - _"More production-ready version"_: using [phusion passenger](https://github.com/phusion/passenger)
 
-Te use case to illustrate this functionalities is an app to work with `dogs`:
+The use case to illustrate this functionality is an app to work with `dogs`:
 
 - Create a new dog
-- See the list of dogs
-- See one specific dog
+- Get the list of all dogs
+- Get one dog by `id`
+- Delete a dog by `id`
 
 ## Elementary conceptions
 - A global loader is implemented to handle project files.
-- To handle `routes` is designed a router that try to emulate `rails` actions:
+- To handle `routes` is designed a router that tries to emulate `rails` actions:
 
 ```rb
 # ----------------
@@ -28,7 +31,7 @@ Te use case to illustrate this functionalities is an app to work with `dogs`:
 # ----------------
 # GET     /resource           # index   - get a list of the resources
 # GET     /resource/:id       # show    - get a specific resource
-# DELETE  /resource/:id       # delete  - delete specific resource
+# DELETE  /resource/:id       # delete  - delete the specific resource
 # GET     /resource/new       # new     - get an HTML page with a form
 # POST    /resource           # create  - create a new resource
 #
@@ -47,12 +50,14 @@ Te use case to illustrate this functionalities is an app to work with `dogs`:
 ## Implemented routes
 
 ### Rendered
-  - main: `http://127.0.0.1:3000/dogs`
-  - specific resource: `http://127.0.0.1:3000/dogs/:id`, where the `id` in the index on DB.
+  - **main:** `http://127.0.0.1:3000/dogs`
+  - **specific resource:** `http://127.0.0.1:3000/dogs/:id`, where the `id` in the index on DB.
 
 ## JSON responses
-  - main: `http://127.0.0.1:3000/dogs`
-  - specific resource: `http://127.0.0.1:3000/dogs/:id`, where the `id` in the index on DB.
+  - **main:** `http://127.0.0.1:3000/jsondogs`
+  - **specific resource:** `http://127.0.0.1:3000/jsondogs/:id`, where the `id` in the index on DB.
+
+See in the next section the differents `HTTP methods` and actions that have been implemented.
 
 ### Example request
 
@@ -65,7 +70,7 @@ curl -u italijancic:test1234 http://127.0.0.1:3000/jsondogs
 #### Get one dog by id
 
 ```bash
-curl -u italijancic:test1234 http://127.0.0.1:3000/jsondogs/1
+curl -u italijancic:test1234 http://127.0.0.1:3000/jsondogs/:id
 ```
 
 #### Create a new dog
@@ -83,9 +88,9 @@ curl -X DELETE -u italijancic:test1234 http://127.0.0.1:9292/jsondogs/:id
 
 *NOTE:* `port` will be `3000` if we run app with `docker compose` or `9292` if we run app from `Dockerfile.base` or locally
 
-## How to run app
+## How to run the app
 
-### Dockercompose: Recomended
+### Dockercompose: Recommended
 
 Build app
 
@@ -144,5 +149,3 @@ irb(main):002>
 - [MVC rack app from scratch](https://tommaso.pavese.me/2016/06/05/a-rack-application-from-scratch-part-1-introducting-rack/#a-naive-and-incomplete-framework)
 
 - [Rack Page](https://github.com/rack/rack)
-
-
