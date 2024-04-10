@@ -14,3 +14,6 @@ Dog_4: !ruby/object:Dog
 Dog_5: !ruby/object:Dog
   id: 5
   name: Locho
+Dog_6: !ruby/object:Dog
+  id: 6
+  name: Woz
