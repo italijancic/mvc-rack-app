@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class JsonDogsController < JsonBaseController
-  # GET /dogs
+  # GET /jsondogs
   #
   def index
     @dogs = Dog.all
@@ -12,7 +12,7 @@ class JsonDogsController < JsonBaseController
     end
   end
 
-  # GET /dogs/:id
+  # GET /jsondogs/:id
   #
   def show
     @dog = Dog.find(id)
@@ -23,27 +23,24 @@ class JsonDogsController < JsonBaseController
     end
   end
 
-  # POST /dogs
-  # not implemented for now
+  # POST /jsondogs
   #
   def create
-    dog = Dog.new(name: params['dog']['name'])
+    data = JSON.parse(request.body.read)
+    dog = Dog.new(name: data['name'])
     dog.save
-    # Build success json response
-    # redirect_to "/dogs/#{dog.id}"
+    json_response({ message: "Dog #{data['name']} was created" })
   end
 
-  # DELETE /dogs/:id
+  # DELETE /jsondogs/:id
   def delete
     dog = Dog.find(id)
     if dog.nil?
-      puts "[ERROR][Dog#delete]: couldn't find Dog_id: #{@dog.id}"
+      json_response({ message: "Dog #{id} not found" }, status: 404)
     else
       dog.delete
-      puts "[INFO][Dog#delete]: Delete Dog_id: #{@dog.id}, not implemented yet!"
+      json_response({ message: "Dog #{id} was delete" })
     end
-    # Build success json response
-    # redirect_to '/dogs'
   end
 
   private

@@ -28,6 +28,7 @@ class DogsController < BaseController
   # not implemented for now
   #
   def create
+    binding.irb
     dog = Dog.new(name: params['dog']['name'])
     dog.save
     redirect_to "/dogs/#{dog.id}"
