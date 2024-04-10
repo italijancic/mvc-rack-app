@@ -9,8 +9,8 @@ FROM phusion/passenger-ruby33
 # Set correct environment variables.
 ENV HOME /root
 ENV RACK_ENV development
-ENV DB_NAME italijancic
-ENV PASSWORD test1234
+ENV BASIC_USER_NM italijancic
+ENV BASIC_PASSWORD test1234
 ENV DB_TYPE ymlstore
 
 # Use baseimage-docker's init process.
